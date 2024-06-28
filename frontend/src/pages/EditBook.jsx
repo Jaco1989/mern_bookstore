@@ -13,10 +13,10 @@ const EditBook = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:5555/api/books/fetch/${id}`)
-      .then((response) => {
-        setAuthor(response.data.author);
-        setPublishYear(response.data.publishYear);
-        setTitle(response.data.title);
+      .then((res) => {
+        setAuthor(res.data.author);
+        setPublishYear(res.data.publishYear);
+        setTitle(res.data.title);
       })
       .catch((error) => {
         console.log(error);

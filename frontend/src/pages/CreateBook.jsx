@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BackButton from "../components/BackButton";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { createBook } from "../app/bookslice";
+import { useDispatch } from "react-redux";
 
 const CreateBook = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [addBook, setAddBook] = useState({
     title: "",
     author: "",
     publishYear: 0,
   });
 
-  const navigate = useNavigate();
-
   const handleSaveBook = () => {
     axios
       .post("http://localhost:5555/api/books/create", addBook)
-      .then(() => {
+      .then((res) => {
+        dispatch(createBook(res.data));
         navigate("/");
       })
       .catch((error) => {
